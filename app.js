@@ -2,6 +2,7 @@ console.log("CookieLab iniciado");
 
 const duracionTreintaDias = 30 * 24 * 60 * 60;
 const saludo = document.querySelector("#saludo");
+const contadorVisitas = document.querySelector("#visitas");
 const selectorTema = document.querySelector("#tema");
 const selectorIdioma = document.querySelector("#idioma");
 
@@ -16,6 +17,11 @@ function leerCookie(clave) {
 function guardarCookie(clave, valor) {
 	document.cookie = `${clave}=${encodeURIComponent(valor)}; max-age=${duracionTreintaDias}; path=/; SameSite=Lax`;
 }
+
+const visitasGuardadas = leerCookie("visitas");
+const visitas = visitasGuardadas === null ? 1 : Number(visitasGuardadas) + 1;
+guardarCookie("visitas", visitas);
+contadorVisitas.textContent = `Has visitado esta página ${visitas} veces`;
 
 function aplicarTema() {
 	document.body.classList.toggle("tema-oscuro", selectorTema.value === "oscuro");
