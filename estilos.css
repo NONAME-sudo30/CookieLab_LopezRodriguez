@@ -1,0 +1,31 @@
+:root {
+	color-scheme: light;
+	font-family: "Segoe UI", sans-serif;
+	color: #27342f;
+	background: #f3f5ef;
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	display: grid;
+	place-items: center;
+}
+
+main {
+	width: min(32rem, calc(100% - 3rem));
+	padding: 2.5rem;
+	border-left: 4px solid #d27045;
+	background: #fffefa;
+}
+
+h1 {
+	margin: 0;
+	font-size: 2rem;
+}
+
+#saludo {
+	min-height: 1.5em;
+	margin-bottom: 0;
+	color: #52635a;
+}
