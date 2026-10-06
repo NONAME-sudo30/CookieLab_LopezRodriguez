@@ -5,6 +5,8 @@ const saludo = document.querySelector("#saludo");
 const contadorVisitas = document.querySelector("#visitas");
 const selectorTema = document.querySelector("#tema");
 const selectorIdioma = document.querySelector("#idioma");
+const botonCambiarNombre = document.querySelector("#cambiar-nombre");
+const botonOlvidarme = document.querySelector("#olvidarme");
 
 function leerCookie(clave) {
 	const cookie = document.cookie
@@ -16,6 +18,10 @@ function leerCookie(clave) {
 
 function guardarCookie(clave, valor) {
 	document.cookie = `${clave}=${encodeURIComponent(valor)}; max-age=${duracionTreintaDias}; path=/; SameSite=Lax`;
+}
+
+function borrarCookie(clave) {
+	document.cookie = `${clave}=; max-age=0; path=/; SameSite=Lax`;
 }
 
 const visitasGuardadas = leerCookie("visitas");
@@ -68,4 +74,30 @@ selectorTema.addEventListener("change", () => {
 selectorIdioma.addEventListener("change", () => {
 	guardarCookie("idioma", selectorIdioma.value);
 	mostrarSaludo(nombre);
+});
+
+botonCambiarNombre.addEventListener("click", () => {
+	const respuesta = prompt("¿Cómo te llamas?");
+	const nuevoNombre = respuesta?.trim();
+
+	if (nuevoNombre) {
+		nombre = nuevoNombre;
+		guardarCookie("usuario", nombre);
+		mostrarSaludo(nombre);
+	}
+});
+
+botonOlvidarme.addEventListener("click", () => {
+	if (confirm("¿Seguro que quieres borrar todas tus cookies de CookieLab?")) {
+		for (const clave of ["usuario", "tema", "idioma", "visitas"]) {
+			borrarCookie(clave);
+		}
+
+		nombre = null;
+		selectorTema.value = "claro";
+		selectorIdioma.value = "es";
+		aplicarTema();
+		mostrarSaludo(nombre);
+		contadorVisitas.textContent = "Has visitado esta página 0 veces";
+	}
 });

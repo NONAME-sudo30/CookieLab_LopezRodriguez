@@ -32,6 +32,19 @@ h1 {
 	color: var(--color-secundario);
 }
 
+.acciones {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin-bottom: 1.5rem;
+}
+
+.acciones button {
+	padding: 0.5rem 0.75rem;
+	font: inherit;
+	cursor: pointer;
+}
+
 .preferencias {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
